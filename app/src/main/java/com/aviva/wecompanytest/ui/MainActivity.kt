@@ -1,7 +1,8 @@
-package com.aviva.wecompanytest
+package com.aviva.wecompanytest.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aviva.wecompanytest.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
