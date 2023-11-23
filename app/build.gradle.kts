@@ -14,6 +14,7 @@ android {
     // Habilitar la generación de campos BuildConfig personalizados
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
 
     defaultConfig {
@@ -100,9 +101,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // Componentes de navegación de Jetpack para manejar la navegación en la app
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     // Picasso para cargar y mostrar imágenes de internet
     implementation("com.squareup.picasso:picasso:2.8")
+
 }
