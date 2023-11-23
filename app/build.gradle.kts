@@ -101,9 +101,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.3.0")
 
     // Dagger-Hilt para inyección de dependencias
-    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.48.1")
     // Procesador de anotaciones para Dagger-Hilt
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
 
     // Componentes de navegación de Jetpack para manejar la navegación en la app
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")

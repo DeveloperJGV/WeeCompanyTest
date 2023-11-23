@@ -5,22 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aviva.wecompanytest.R
+import com.aviva.wecompanytest.data.api.RetrofitInstance
+import com.aviva.wecompanytest.data.repository.SuperheroRepository
 import com.aviva.wecompanytest.ui.adapters.SuperheroAdapter
 import com.aviva.wecompanytest.util.Result
-import androidx.fragment.app.viewModels
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.aviva.wecompanytest.data.model.Character
 
 class MainFragment : Fragment() {
 
-    // Crear una instancia del adaptador
+    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModelFactory: MainViewModelFactory
     private lateinit var superheroAdapter: SuperheroAdapter
 
-    // ViewModel
-    private val viewModel: MainViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Inicialización del repositorio y la fábrica de ViewModel
+        val superheroRepository = SuperheroRepository(RetrofitInstance.api)
+        viewModelFactory = MainViewModelFactory(superheroRepository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +44,12 @@ class MainFragment : Fragment() {
 
         // Configurar el RecyclerView y el adaptador
         superheroAdapter = SuperheroAdapter { character: Character ->
-            // Aquí puedes manejar el evento de clic en cada personaje
+            // Manejo del clic en cada personaje
             Toast.makeText(context, "Clicked on: ${character.name}", Toast.LENGTH_SHORT).show()
         }
+
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context) // Asignación del LayoutManager
         recyclerView.adapter = superheroAdapter
 
         // Observar los cambios del ViewModel
