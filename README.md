@@ -12,5 +12,11 @@ El objetivo es demostrar habilidades en construir aplicaciones robustas y escala
 - **Clean Architecture**: Se sigue los principios de Clean Architecture para una estructura de proyecto escalable y mantenible.
 - **Funcionalidad Offline**: Se garantiza que la aplicación funcione incluso sin conexión a internet.
 
-## Licencia
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+## Notas Finales
+
+Encontré que la API de Marvel tarda mucho en cargar las imagenes, entonces hice una petición y cambie el tiempo de respuesta de Picasso para que sea mÁs largo, pero las imagenes se ven, en caso de contar con un error 504, mandarán un Toast. Un poco de paciencia.
+Muchas gracias por la oportunidad de presentar este examen, me faltaron algunas cosas que ya no pude terminar por darle prioridad a otras y unas fallas en mis tiempos
+Espero que les guste el Clean Architecture y el MVVM.
+En caso de que un personaje no tenga descripción de la API la app dice: "Descripción Clasificada"
+Perdón por que se ve fea
+Pueden revisar todo el repo para ver como hago los commits y MR.
