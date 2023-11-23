@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeCompanyTest</string>
+    <string name="superhero_image">Imagen del superhéroe</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="classified_description">Descripción Clasificada</string>
+
 </resources>
