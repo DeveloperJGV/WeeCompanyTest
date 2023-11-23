@@ -21,7 +21,7 @@
         android:label="fragment_hero_details"
         tools:layout="@layout/fragment_hero_details" >
         <argument
-            android:name="characterId"
+            android:name="HERO_ID"
             app:argType="integer" />
     </fragment>
 </navigation>

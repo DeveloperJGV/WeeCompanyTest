@@ -49,6 +49,8 @@ class MainFragment : Fragment() {
             // Manejo del clic en cada personaje
             val action = MainFragmentDirections.actionMainFragmentToHeroDetailsFragment(character.id)
             navController.navigate(action)
+            println("Navigating to HeroDetailsFragment with character ID: ${character.id}")
+
         }
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)

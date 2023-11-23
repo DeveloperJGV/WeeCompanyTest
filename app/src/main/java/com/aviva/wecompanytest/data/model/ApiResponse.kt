@@ -22,15 +22,23 @@ data class Character(
     val id: Int,
     val name: String,
     val description: String,
-    val thumbnail: Image, // Una estructura de imagen para manejar las miniaturas
-    // Puedes agregar más campos según los datos que quieras manejar
+    val thumbnail: Image,
+    val comics: ComicList
+)
+
+data class ComicList(
+    val available: Int,
+    val items: List<ComicSummary>
+)
+
+data class ComicSummary(
+    val name: String
 )
 
 // Modelo para las imágenes
 data class Image(
-    val path: String, // El camino base de la imagen
-    val extension: String // La extensión del archivo de imagen
+    val path: String,
+    val extension: String
 ) {
-    // Puedes añadir una función para obtener la URL completa de la imagen
     fun getUrl(): String = "$path.$extension"
 }

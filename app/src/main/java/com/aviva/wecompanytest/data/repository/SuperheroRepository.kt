@@ -17,4 +17,15 @@ class SuperheroRepository(private val apiService: MarvelApiService) {
         // Manejar los casos en que la respuesta no sea 200 OK
         throw Exception("Error fetching superheroes: ${response.status}")
     }
+
+    suspend fun getCharacterDetails(characterId: Int): Character {
+        val timestamp = System.currentTimeMillis().toString()
+        val hash = generateMarvelHash(timestamp, BuildConfig.MARVEL_API_KEY_PUBLIC, BuildConfig.MARVEL_API_KEY_PRIVATE)
+        val response = apiService.getCharacterDetails(characterId, BuildConfig.MARVEL_API_KEY_PUBLIC, timestamp, hash)
+        if (response.code == 200) {
+            return response.data.results[0]
+        }
+        // Manejar los casos en que la respuesta no sea 200 OK
+        throw Exception("Error fetching character details: ${response.status}")
+    }
 }
