@@ -19,5 +19,9 @@
         android:id="@+id/heroDetailsFragment"
         android:name="com.aviva.wecompanytest.ui.details.HeroDetailsFragment"
         android:label="fragment_hero_details"
-        tools:layout="@layout/fragment_hero_details" />
+        tools:layout="@layout/fragment_hero_details" >
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

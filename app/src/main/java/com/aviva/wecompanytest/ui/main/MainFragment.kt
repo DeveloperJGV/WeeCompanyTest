@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aviva.wecompanytest.R
@@ -43,9 +44,11 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Configurar el RecyclerView y el adaptador
+        val navController = findNavController()
         superheroAdapter = SuperheroAdapter { character: Character ->
             // Manejo del clic en cada personaje
-            Toast.makeText(context, "Clicked on: ${character.name}", Toast.LENGTH_SHORT).show()
+            val action = MainFragmentDirections.actionMainFragmentToHeroDetailsFragment(character.id)
+            navController.navigate(action)
         }
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)

@@ -3,12 +3,15 @@ package com.aviva.wecompanytest.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aviva.wecompanytest.R
 import com.aviva.wecompanytest.data.model.Character
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import android.widget.Toast
 
 class SuperheroAdapter(
     private var characterList: List<Character> = emptyList(),
@@ -32,7 +35,21 @@ class SuperheroAdapter(
             // Utiliza Picasso para cargar la imagen del personaje
             Picasso.get()
                 .load(character.thumbnail.getUrl())
-                .into(imageView)
+                .placeholder(R.drawable.placeholder_image)
+                .into(imageView, object : Callback {
+                    override fun onSuccess() {
+                        // La imagen se cargó correctamente
+                    }
+
+                    override fun onError(e: Exception?) {
+                        // Hubo un error al cargar la imagen
+                        e?.printStackTrace()
+                        if (e is java.net.SocketTimeoutException) {
+                            Toast.makeText(itemView.context, "Error 504: Timeout", Toast.LENGTH_SHORT).show()
+                        }
+                        imageView.setImageResource(R.drawable.placeholder_image)
+                    }
+                })
         }
     }
 
@@ -50,6 +67,8 @@ class SuperheroAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val character = characterList[position]
         holder.bind(character)
+        val animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.item_animation)
+        holder.itemView.startAnimation(animation)
     }
 
     override fun getItemCount() = characterList.size

@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorBackground">#FF2800</color> <!-- Un rojo vibrante -->
+    <color name="colorText">#FFFFFF</color> <!-- Blanco para el texto -->
+
 </resources>
