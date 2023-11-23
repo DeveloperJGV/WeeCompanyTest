@@ -3,22 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/mainFragment">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.aviva.wecompanytest.ui.main.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.aviva.wecompanytest.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainActivity_to_heroDetailsFragment"
+            android:id="@+id/action_mainFragment_to_heroDetailsFragment"
             app:destination="@id/heroDetailsFragment" />
-    </activity>
+    </fragment>
 
     <fragment
         android:id="@+id/heroDetailsFragment"
         android:name="com.aviva.wecompanytest.ui.details.HeroDetailsFragment"
-        android:label="HeroDetailsFragment" />
-
-
+        android:label="fragment_hero_details"
+        tools:layout="@layout/fragment_hero_details" />
 </navigation>

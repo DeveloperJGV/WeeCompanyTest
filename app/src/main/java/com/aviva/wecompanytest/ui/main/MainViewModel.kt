@@ -2,27 +2,19 @@ package com.aviva.wecompanytest.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.aviva.wecompanytest.BuildConfig
-import com.aviva.wecompanytest.data.api.RetrofitInstance
-import com.aviva.wecompanytest.util.generateMarvelHash
+import com.aviva.wecompanytest.data.repository.SuperheroRepository
+import com.aviva.wecompanytest.util.Result
 import kotlinx.coroutines.Dispatchers
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val superheroRepository: SuperheroRepository) : ViewModel() {
 
-    // LiveData que expone la lista de superhéroes o un mensaje de error
     val superheroes = liveData(Dispatchers.IO) {
+        emit(Result.Loading) // Emite el estado de carga
         try {
-            val timestamp = System.currentTimeMillis().toString()
-            val hash = generateMarvelHash(timestamp, BuildConfig.MARVEL_API_KEY_PUBLIC, BuildConfig.MARVEL_API_KEY_PRIVATE)
-            val response = RetrofitInstance.api.getCharacters(BuildConfig.MARVEL_API_KEY_PUBLIC, timestamp, hash)
-
-            if (response.code == 200) {
-                emit(response.data.results) // Emite la lista de personajes
-            } else {
-                emit(emptyList()) // Emite una lista vacía
-            }
+            val data = superheroRepository.getSuperheroes()
+            emit(Result.Success(data)) // Emite el resultado exitoso con los datos
         } catch (e: Exception) {
-            emit(emptyList()) // En caso de una excepción, emite una lista vacía
+            emit(Result.Error(e)) // Emite un error si algo sale mal
         }
     }
 }

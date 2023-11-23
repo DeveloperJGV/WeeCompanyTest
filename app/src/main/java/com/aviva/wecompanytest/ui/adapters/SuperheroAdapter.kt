@@ -1,6 +1,5 @@
 package com.aviva.wecompanytest.ui.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,34 +7,39 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aviva.wecompanytest.R
-import com.aviva.wecompanytest.data.model.Superhero
-import com.aviva.wecompanytest.ui.details.HeroDetailsActivity
-
+import com.aviva.wecompanytest.data.model.Character
+import com.squareup.picasso.Picasso
 
 class SuperheroAdapter(
-    private val superheroList: List<Superhero>,
-    private val onClick: (Superhero) -> Unit
+    private var characterList: List<Character> = emptyList(),
+    private val onClick: (Character) -> Unit
 ) : RecyclerView.Adapter<SuperheroAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View, val onClick: (Superhero) -> Unit) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, val onClick: (Character) -> Unit) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.imageViewSuperhero)
         val textViewName: TextView = view.findViewById(R.id.textViewSuperheroName)
-        private var currentSuperhero: Superhero? = null
+        private var currentCharacter: Character? = null
 
         init {
             view.setOnClickListener {
-                currentSuperhero?.let {
-                    onClick(it)
-                }
+                currentCharacter?.let(onClick)
             }
         }
 
-        fun bind(superhero: Superhero) {
-            currentSuperhero = superhero
-            // Aquí puedes configurar la imagen y el nombre
-            textViewName.text = superhero.name
-            // imageView.setImage... // Configurar la imagen utilizando Picasso o Glide
+        fun bind(character: Character) {
+            currentCharacter = character
+            textViewName.text = character.name
+            // Utiliza Picasso para cargar la imagen del personaje
+            Picasso.get()
+                .load(character.thumbnail.getUrl())
+                .into(imageView)
         }
+    }
+
+    // Método para actualizar la lista de personajes
+    fun submitList(characters: List<Character>) {
+        characterList = characters
+        notifyDataSetChanged() // Notifica al adaptador que los datos han cambiado
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,9 +48,9 @@ class SuperheroAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val superhero = superheroList[position]
-        holder.bind(superhero)
+        val character = characterList[position]
+        holder.bind(character)
     }
 
-    override fun getItemCount() = superheroList.size
+    override fun getItemCount() = characterList.size
 }

@@ -1,10 +1,15 @@
 import java.util.Properties
 import java.io.FileInputStream
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+
+
 }
 
 android {
@@ -96,9 +101,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.3.0")
 
     // Dagger-Hilt para inyección de dependencias
-    implementation("com.google.dagger:hilt-android:2.28-alpha")
+    implementation("com.google.dagger:hilt-android:2.38.1")
     // Procesador de anotaciones para Dagger-Hilt
-    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     // Componentes de navegación de Jetpack para manejar la navegación en la app
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
