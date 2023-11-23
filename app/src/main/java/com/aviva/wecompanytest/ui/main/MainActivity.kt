@@ -1,4 +1,4 @@
-package com.aviva.wecompanytest.ui
+package com.aviva.wecompanytest.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
