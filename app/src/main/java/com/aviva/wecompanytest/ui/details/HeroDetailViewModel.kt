@@ -12,7 +12,6 @@ class HeroDetailViewModel(private val superheroRepository: SuperheroRepository, 
         emit(Result.Loading) // Emite el estado de carga
         try {
             val data = superheroRepository.getCharacterDetails(characterId)
-            println("Received character details: $data")
 
             emit(Result.Success(data)) // Emite el resultado exitoso con los datos
         } catch (e: Exception) {
