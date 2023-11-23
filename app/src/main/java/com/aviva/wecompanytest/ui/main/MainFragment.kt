@@ -47,9 +47,9 @@ class MainFragment : Fragment() {
         val navController = findNavController()
         superheroAdapter = SuperheroAdapter { character: Character ->
             // Manejo del clic en cada personaje
-            val action = MainFragmentDirections.actionMainFragmentToHeroDetailsFragment(character.id)
+            val action = MainFragmentDirections.actionMainFragmentToHeroDetailsFragment(character.id, character.thumbnail.getUrl())
             navController.navigate(action)
-            println("Navigating to HeroDetailsFragment with character ID: ${character.id}")
+            println("Navigating to HeroDetailsFragment with character ID: ${character.id} and image URL: ${character.thumbnail.getUrl()}")
 
         }
 
